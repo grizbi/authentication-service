@@ -18,6 +18,14 @@ public class UserService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findByUsername(username);
 
-        return new CustomUserDetails(user);
+        if(user != null) {
+            return new CustomUserDetails(user);
+        }
+
+        return CustomUserDetails.builder()
+                .user(new User())
+                .build();
     }
+
+
 }

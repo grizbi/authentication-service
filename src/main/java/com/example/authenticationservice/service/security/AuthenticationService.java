@@ -22,7 +22,7 @@ public class AuthenticationService {
         try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
         } catch (AuthenticationException exception) {
-            log.error("Bad credentials");
+            log.error("Bad credentials", exception);
             throw exception;
         }
 

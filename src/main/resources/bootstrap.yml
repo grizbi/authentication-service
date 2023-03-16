@@ -13,6 +13,6 @@ spring:
       enabled: true
 
 jwt:
-  secret: jwsecret
+  secret: abcdefghijklmnOPQRSTUVWXYZabcdefghijklmnOPQRSTUVWXYZ
   token:
     validity: 28800000
