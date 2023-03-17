@@ -1,13 +1,18 @@
 package com.example.authenticationservice.service.security;
 
+import com.example.authenticationservice.exception.InvalidActivityException;
 import com.example.entitiesservice.repository.User;
 import com.example.entitiesservice.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
+@Slf4j
 @RequiredArgsConstructor
 @Service
 public class UserService implements UserDetailsService {
@@ -16,16 +21,25 @@ public class UserService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findByUsername(username);
+        Optional<User> user = userRepository.findByUsername(username);
 
-        if(user != null) {
-            return new CustomUserDetails(user);
-        }
-
-        return CustomUserDetails.builder()
+        return user.map(CustomUserDetails::new).orElseGet(() -> CustomUserDetails.builder()
                 .user(new User())
-                .build();
+                .build());
+
     }
 
+    public void addUser(User user) {
+        if (isUsernameDuplicated(user.getUsername())) {
+            log.error("Username already exists in DB");
+            throw new InvalidActivityException("Specified username already exists in DB.");
+        }
+        userRepository.save(user);
+    }
 
+    private boolean isUsernameDuplicated(String username) {
+        Optional<User> foundUser = userRepository.findByUsername(username);
+
+        return foundUser.isPresent();
+    }
 }
