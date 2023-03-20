@@ -3,7 +3,7 @@ package com.example.authenticationservice.controller;
 import com.example.authenticationservice.service.security.AuthenticationRequest;
 import com.example.authenticationservice.service.security.AuthenticationResponse;
 import com.example.authenticationservice.service.security.AuthenticationService;
-import com.example.authenticationservice.service.security.UserService;
+import com.example.authenticationservice.service.UserService;
 import com.example.entitiesservice.repository.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

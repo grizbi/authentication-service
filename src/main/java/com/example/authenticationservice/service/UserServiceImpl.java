@@ -1,6 +1,7 @@
-package com.example.authenticationservice.service.security;
+package com.example.authenticationservice.service;
 
 import com.example.authenticationservice.exception.InvalidActivityException;
+import com.example.authenticationservice.service.security.CustomUserDetails;
 import com.example.entitiesservice.repository.User;
 import com.example.entitiesservice.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -15,7 +16,7 @@ import java.util.Optional;
 @Slf4j
 @RequiredArgsConstructor
 @Service
-public class UserService implements UserDetailsService {
+public class UserServiceImpl implements UserDetailsService, UserService {
 
     private final UserRepository userRepository;
 
