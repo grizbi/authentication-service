@@ -30,12 +30,13 @@ public class UserServiceImpl implements UserDetailsService, UserService {
 
     }
 
-    public void addUser(User user) {
+    public Void addUser(User user) {
         if (isUsernameDuplicated(user.getUsername())) {
-            log.error("Username already exists in DB");
             throw new InvalidActivityException("Specified username already exists in DB.");
         }
+
         userRepository.save(user);
+        return null;
     }
 
     private boolean isUsernameDuplicated(String username) {

@@ -8,5 +8,5 @@ public interface UserService {
      *
      * @param user User to be added
      */
-    void addUser(User user);
+    Void addUser(User user);
 }
