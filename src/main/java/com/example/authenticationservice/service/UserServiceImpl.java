@@ -22,12 +22,10 @@ public class UserServiceImpl implements UserDetailsService, UserService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<User> user = userRepository.findByUsername(username);
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException("Username not found"));
 
-        return user.map(CustomUserDetails::new).orElseGet(() -> CustomUserDetails.builder()
-                .user(new User())
-                .build());
-
+        return new CustomUserDetails(user);
     }
 
     public Void addUser(User user) {

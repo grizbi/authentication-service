@@ -3,6 +3,6 @@ spring:
     active: prod
 
 jwt:
-  secret: abcdefghijklmnOPQRSTUVWXYZabcdefghijklmnOPQRSTUVWXYZ
+  secret: ${secretkey}
   token:
     validity: 28800000

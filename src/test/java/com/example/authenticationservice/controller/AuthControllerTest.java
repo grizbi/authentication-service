@@ -60,7 +60,7 @@ public class AuthControllerTest {
     }
 
     private User getUser() {
-        return new User(1L, PASSWORD, USERNAME);
+        return new User(1L, PASSWORD, USERNAME, 5000);
     }
 
     @Test
